@@ -14,7 +14,7 @@ class MyCoordsTest {
 		Point3D gps_test_one= new Point3D(20,20,2);
 		Point3D gps_test_add=cord.add(gps_test_one, new Point3D(10,10,10));
 		System.out.println(gps_test_add.x()+" :"+gps_test_add.y()+" :"+gps_test_add.z());
-		assertTrue(20.0001 <=gps_test_add.x()&&20.0002 >=gps_test_add.x()&&20.00000<=gps_test_add.x()&&20.0001>=gps_test_add.y()&&17.4643<=gps_test_add.z()&&17.4644>=gps_test_add.z());
+		assertTrue(20.0001 <=gps_test_add.x()&&20.0002 >=gps_test_add.x()&&20.00000<=gps_test_add.y()&&20.0001>=gps_test_add.y()&&17.4643<=gps_test_add.z()&&17.4644>=gps_test_add.z());
 	}
 
 	@Test
