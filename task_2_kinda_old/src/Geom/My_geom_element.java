@@ -41,6 +41,9 @@ public class My_geom_element implements Geom_element{
 	public Point3D getMy_geom() {
 		return my_geom;
 	}
+	public void setMy_geom(Point3D geom) {
+		this.my_geom = geom;
+	}
 
 	
 }

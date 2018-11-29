@@ -1,7 +1,6 @@
 package File_format;
 
 import Geom.My_geom_element;
-import Geom.Point3D;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,8 +10,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 import java.util.Date;
 
 import GIS.My_GIS_layer;

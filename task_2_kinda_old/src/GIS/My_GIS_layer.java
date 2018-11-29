@@ -8,7 +8,7 @@ import java.util.Set;
 public class My_GIS_layer implements GIS_layer{
 	
 
-    Set<GIS_element> my_set = new HashSet<GIS_element>();
+    private Set<GIS_element> my_set = new HashSet<GIS_element>();
 	private My_meta_data data;
 
 
