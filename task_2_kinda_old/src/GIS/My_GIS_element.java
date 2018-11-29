@@ -1,16 +1,33 @@
 package GIS;
 
+import Coords.MyCoords;
 import Geom.Geom_element;
 import Geom.My_geom_element;
 import Geom.Point3D;
-
+/**
+ * This class represents a GIS element with geometric representation and meta data such as:
+ * Orientation, color, string, timing...
+ * @author Shilo Gilor and Amiel Liberman
+ *
+ */
 public class My_GIS_element implements GIS_element{
 	
 	private String MAC , SSID , AuthMode , Channel , RSSI , AccuracyMeters , Type;
 	private My_geom_element geom;
 	private My_meta_data data;
 	
-
+/**
+ * 
+ * @param geom the geo information of the location of the element (gps)
+ * @param data the meta fata such as colour orientation  and time
+ * @param mAC data of point
+ * @param sSID data of point
+ * @param authMode data of point
+ * @param channel data of point
+ * @param rSSI data of point
+ * @param accuracyMeters data of point
+ * @param type data of point
+ */
 	public My_GIS_element(My_geom_element geom, My_meta_data data, String mAC, String sSID, String authMode, String channel, String rSSI,
 			String accuracyMeters, String type) {
 		super();
@@ -37,8 +54,8 @@ public class My_GIS_element implements GIS_element{
 
 	@Override
 	public void translate(Point3D vec) {
-		// TODO Auto-generated method stub
-		
+		MyCoords mycoords = new MyCoords();
+		geom.setMy_geom(mycoords.add(geom.getMy_geom(), vec));		
 	}
 
 	public Point3D getMy_geom() {
