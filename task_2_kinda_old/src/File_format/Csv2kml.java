@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,10 +28,10 @@ import GIS.My_meta_data;
 public class Csv2kml 
 {
 
-	public My_GIS_layer convertCSVToKML(String path_of_csv,String path_of_kml_end_point, String kml_file_name) throws IOException
+	public My_GIS_layer convertCSVToKML(String path_of_csv,String path_of_kml_end_point, String kml_file_name) throws IOException, NumberFormatException, ParseException
 	{
 		
-		My_GIS_layer gis_layer = new My_GIS_layer(new My_meta_data(new Date().getTime(), null));	
+		My_GIS_layer gis_layer = new My_GIS_layer(new My_meta_data(new Date().getTime(), null , "green"));	
 		String kmlstart = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
 				"<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n"
 				+ "<Document><Style id=\"red\"><IconStyle><Icon>"
@@ -51,7 +53,8 @@ public class Csv2kml
 				break;
 			String[] row = line.split(",");
 			My_GIS_element gis_element = new My_GIS_element(new My_geom_element(Double.parseDouble(row[7]),Double.parseDouble(row[6]),Double.parseDouble(row[8]))
-					, null, row[0], row[1], row[2], row[3], row[4], row[5], row[9] , row[10]);
+					, new My_meta_data((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(row[3])).getTime(), null, "red"),
+					row[0], row[1], row[2], row[4], row[5], row[9] , row[10]);
 			gis_layer.add(gis_element);
 			kmlmiddle = kmlmiddle + gis_element.toStringOfGISElements();
 			line = br.readLine();
@@ -70,7 +73,7 @@ public class Csv2kml
 		}   
 		return gis_layer;
 	}
-	public My_GIS_project multiCSV(String dir) throws IOException
+	public My_GIS_project multiCSV(String dir) throws IOException, NumberFormatException, ParseException
 	{
 		My_GIS_project gis_project = new My_GIS_project(null);
 		int i=0;
@@ -85,6 +88,15 @@ public class Csv2kml
 				gis_project.add(convertCSVToKML(filePath, "/Users/shilo/Desktop/", "kmltest_"+i));
 			}
 		}
+		Writer fwriter;
+		try {
+			fwriter = new FileWriter(dir+"kml_project.kml");
+			fwriter.write(gis_project.toStringOfGISProject());
+			fwriter.flush();
+			fwriter.close();
+		}catch (IOException e1) {
+			e1.printStackTrace();
+		} 
 		return gis_project;
 	}
 }
