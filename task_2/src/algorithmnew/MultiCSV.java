@@ -6,8 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import GIS.My_GIS_element;
 import GIS.My_GIS_layer;
@@ -16,10 +14,10 @@ import GIS.My_meta_data;
 import Geom.My_geom_element;
 
 public class MultiCSV {
-	public My_GIS_layer convertCSVToKML(String path_of_csv) throws IOException, NumberFormatException, ParseException
+	public My_GIS_layer convertCSVToKML(String path_of_csv) throws IOException
 	{
 		
-		My_GIS_layer gis_layer = new My_GIS_layer(new My_meta_data(new Date().getTime(), null , "7f00ffff"));	
+		My_GIS_layer gis_layer = new My_GIS_layer(new My_meta_data(new Date().getTime(), null));	
 		BufferedReader br = new BufferedReader(new FileReader(path_of_csv));
 		br.readLine();
 		br.readLine();
@@ -30,17 +28,17 @@ public class MultiCSV {
 				break;
 			String[] row = line.split(",");
 			My_GIS_element gis_element = new My_GIS_element(new My_geom_element(Double.parseDouble(row[7]),Double.parseDouble(row[6]),Double.parseDouble(row[8]))
-					, new My_meta_data((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(row[3])).getTime(), null, "red"),
-					row[0], row[1], row[2], row[4], row[5], row[9] , row[10]);
+					, null, row[0], row[1], row[2], row[3], row[4], row[5], row[9] , row[10]);
 			gis_layer.add(gis_element);
 			kmlmiddle = kmlmiddle + gis_element.toStringOfGISElements();
 			line = br.readLine();
 		}  
 		return gis_layer;
 	}
-	public My_GIS_project multiCSV(String dir,String out_dir,String out_name) throws IOException, NumberFormatException, ParseException
+	public My_GIS_project multiCSV(String dir,String out_dir,String out_name) throws IOException
 	{
 		My_GIS_project gis_project = new My_GIS_project(null);
+		int i=0;
 		File[] filesInDirectory = new File(dir).listFiles();
 		for(File f : filesInDirectory)
 		{
@@ -48,8 +46,8 @@ public class MultiCSV {
 			String fileExtenstion = filePath.substring(filePath.lastIndexOf(".") + 1,filePath.length());
 			if("csv".equals(fileExtenstion))
 			{
-				My_GIS_layer gis_layer =convertCSVToKML(filePath);
-				gis_project.add(gis_layer);
+				i++;
+				gis_project.add(convertCSVToKML(filePath));
 			}
 		}
 		Writer fwriter;

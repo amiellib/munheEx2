@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="task_2_kinda_old/src"/>
+	<classpathentry kind="src" path="task_2_kinda_old/test"/>
+	<classpathentry kind="src" path="task_2/src"/>
+	<classpathentry kind="src" path="task_2/test"/>
+	<classpathentry kind="output" path="task_2/bin"/>
+</classpath>

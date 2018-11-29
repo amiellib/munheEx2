@@ -90,9 +90,15 @@ public class My_GIS_layer implements GIS_layer{
 		return data;
 	}
 
+
 	public String toStringOfGISLayer() 
 	{
-		String final_string ="<Folder><name>Wifi Networks</name>";
+		String final_string ="<Folder><name>Wifi Networks</name>"
+				+"<Style>"
+				+ "<LineStyle>\n" + 
+				"    <color>"+ data.getColour()+"</color>\n" + 
+				"  </LineStyle>\n" + 
+				"</Style>";
 		for(GIS_element element: my_set)
 		{
 			final_string+= ((My_GIS_element)element).toStringOfGISElements();

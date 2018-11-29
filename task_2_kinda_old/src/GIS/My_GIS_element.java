@@ -6,18 +6,17 @@ import Geom.Point3D;
 
 public class My_GIS_element implements GIS_element{
 	
-	private String MAC , SSID , AuthMode , FirstSeen , Channel , RSSI , AccuracyMeters , Type;
+	private String MAC , SSID , AuthMode , Channel , RSSI , AccuracyMeters , Type;
 	private My_geom_element geom;
 	private My_meta_data data;
 	
 
-	public My_GIS_element(My_geom_element geom, My_meta_data data, String mAC, String sSID, String authMode, String firstSeen, String channel, String rSSI,
+	public My_GIS_element(My_geom_element geom, My_meta_data data, String mAC, String sSID, String authMode, String channel, String rSSI,
 			String accuracyMeters, String type) {
 		super();
 		MAC = mAC;
 		SSID = sSID;
 		AuthMode = authMode;
-		FirstSeen = firstSeen;
 		Channel = channel;
 		RSSI = rSSI;
 		AccuracyMeters = accuracyMeters;
@@ -57,9 +56,7 @@ public class My_GIS_element implements GIS_element{
 		return AuthMode;
 	}
 
-	public String getFirstSeen() {
-		return FirstSeen;
-	}
+
 
 	public String getChannel() {
 		return Channel;
@@ -81,12 +78,16 @@ public class My_GIS_element implements GIS_element{
 		
 		return "\t<Placemark>\n" +
 				"\t<name><![CDATA[" + SSID + "]]></name>\n" +
+				"  <LineStyle>\n" + 
+				"                <color>"+data.getColour()+"</color>\n" + 
+				"                <width>2</width>\n" + 
+				"            </LineStyle>"+
 				"<ExtendedData>\n 	     <Data name=\"MAC\">"
 				+ "  <value>" + MAC + "</value>"
 				+ "    </Data>      <Data name=\"AuthMode\">	  "
 				+ "  <value>" + AuthMode + "</value>"
 				+ "    </Data>      <Data name=\"FirstSeen\">	  "
-				+ "  <value>" + FirstSeen + "</value>"
+				+ "  <value>" + data.getUTC() + "</value>"
 				+ "    </Data>      <Data name=\"Channel\">	  "
 				+ "  <value>" + Channel + "</value>"
 				+ "    </Data>      <Data name=\"RSSI\">	  "

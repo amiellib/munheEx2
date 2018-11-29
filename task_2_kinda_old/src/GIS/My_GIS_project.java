@@ -86,6 +86,7 @@ public class My_GIS_project implements GIS_project{
 		return data;
 	}
 
+
 	public String toStringOfGISProject() {
 		String final_string = "";
 		final_string += "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
