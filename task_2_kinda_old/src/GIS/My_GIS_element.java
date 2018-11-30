@@ -91,14 +91,15 @@ public class My_GIS_element implements GIS_element{
 		return Type;
 	}
 
-	public String toStringOfGISElements() {
+	public String toStringOfGISElements(String color) {
 		
 		return "\t<Placemark>\n" +
-				"\t<name><![CDATA[" + SSID + "]]></name>\n" +
-				"  <LineStyle>\n" + 
-				"                <color>"+data.getColour()+"</color>\n" + 
-				"                <width>2</width>\n" + 
-				"            </LineStyle>"+
+				"\t<name><![CDATA[" + SSID + "]]></name>\n" 
+				+"<Style>"
+				+ "  <IconStyle>\n" + 
+				"             <color>"+color+"</color>\n" + 
+				"          </IconStyle>"+
+				"</Style>"+
 				"<ExtendedData>\n 	     <Data name=\"MAC\">"
 				+ "  <value>" + MAC + "</value>"
 				+ "    </Data>      <Data name=\"AuthMode\">	  "

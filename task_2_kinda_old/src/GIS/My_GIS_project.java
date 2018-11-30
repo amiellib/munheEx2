@@ -5,10 +5,16 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * 
+ * @author Shilo Gilor and Amiel Liberman
+ *
+ */
 public class My_GIS_project implements GIS_project{
 
     Set<GIS_layer> my_layers = new HashSet<GIS_layer>();
 	private My_meta_data data;
+	
 
 
 	public My_GIS_project(My_meta_data data) {
