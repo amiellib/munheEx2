@@ -2,6 +2,9 @@ package Geom;
 
 import java.io.Serializable;
 public class Point3D implements Geom_element, Serializable 
+/**
+ * @author Shilo Gilor and Amiel Liberman
+ */
 {
 
 	/**
@@ -87,7 +90,12 @@ public class Point3D implements Geom_element, Serializable
 public final static int ONSEGMENT = 0,  LEFT = 1, RIGHT = 2, INFRONTOFA = 3, BEHINDB = 4, ERROR = 5;
 public final static int DOWN = 6, UP = 7;
 
-/** return up iff this point is above the SEGMENT (not the line) */
+/** return up iff this point is above the SEGMENT (not the line) 
+ * @param a is a Point3D
+ * @param b is a Point3D
+ * @return flag is a int
+ */
+
     public int pointLineTest2(Point3D a, Point3D b) {
     	int flag = this.pointLineTest(a,b);
     	if(a._x < b._x ) {
@@ -122,6 +130,9 @@ public final static int DOWN = 6, UP = 7;
 	INFRONTOFA:  ��+��a---------b������                              <br>
         BEHINDB:  �����a---------b����+�                              <br>
 	ERROR: a==b || a==null || b == null;                               <br>
+	* @param a is a Point3D
+    * @param b is a Point3D
+    * @return ONSEGMENT a int 
     */
 
     public int pointLineTest(Point3D a, Point3D b) {
@@ -160,11 +171,20 @@ public final static int DOWN = 6, UP = 7;
 	
 	
 	////////////////////////////////////////////////////////////////
+    /**
+     * 
+     * @param center Point3D
+     * @param vec Point3D
+     */
 	public void rescale(Point3D center, Point3D vec) {
 		if(center!=null && vec != null)
 			rescale(center,vec.x(),vec.y(),vec.z());
 	}
-	
+	/**
+	 * 
+	 * @param center Point3D
+	 * @param size double
+	 */
 	public void rescale(Point3D center, double size) {
 		if(center!=null && size>0)
 			rescale(center,size,size,size);
@@ -185,25 +205,34 @@ public final static int DOWN = 6, UP = 7;
 		_y = (center.y() +  radius * Math.sin(a+angle));
 	}								
 	/** computes the angleXY between p1 and p2 in RADIANS: <br><br>
-	up:(PI/2)  , down (-PI/2) , right(0),  left(+- PI).   [-PI, +PI]	*/
+	up:(PI/2)  , down (-PI/2) , right(0),  left(+- PI).   [-PI, +PI]
+	*@param p is a Point3D
+	*@return the angle of xy
+	*/
 	public double angleXY(Point3D p) {
 		if(p==null) throw new RuntimeException("** Error: Point3D angle got null **");
 		return Math.atan2((p._y-_y), (p._x-_x));
 	}
 	/** computes the angleXY between p1 and p2 in RADIANS: <br><br>
-	up:(PI/2)  , down (1.5PI) , right(0),  left(PI).   [0,2PI].	*/
+	up:(PI/2)  , down (1.5PI) , right(0),  left(PI).   [0,2PI].	
+	*@param p is a Point3D
+	*@return the angle of xy in 2PI
+	*/
 	public double angleXY_2PI(Point3D p) {
 		if(p==null) throw new RuntimeException("** Error: Point3D angle got null **");
 		double ans = Math.atan2((p._y-_y), (p._x-_x));
 		if (ans<0) ans = 2*Math.PI+ans;
 		return ans;
 	}
-	/** computes the angleZ between p1 and p2 in RADIANS */ 							
+	/** computes the angleZ between p1 and p2 in RADIANS 
+	 **@param p is a Point3D
+	 *@return angle of z
+	 */ 							
 	public double angleZ(Point3D p) {
 		if(p==null) throw new RuntimeException("** Error: Point3D angleZ got null **");
 		return Math.atan2((p._z-_z), this.distance2D(p));
 	}	
-/** return the (planer angle of the vector between this --> p, in DEGREES, in a
+/** return the (planer angle of the vector between this -- p, in DEGREES, in a
  * compass order: north 0, east 90, south 180, west 270.
  * @param p is the end point of the vector (z value is ignored). 
  * @return angle in compass styye [0,360).
@@ -216,25 +245,34 @@ public final static int DOWN = 6, UP = 7;
 		else ans = 450-a_deg;
 		return ans;
 	}
-	/** return the vertical angles in DEGREES of the vector this-->p
-	 * 
-	 * */
+	/** return the vertical angles in DEGREES of the vector this--p
+	 *@param p is a Point3D
+	 *@return the up_angle
+	 */
 	public double up_angle(Point3D p) {
 		double ans = 0;
 		ans = Math.atan2((p._z-_z), this.distance2D(p));
 		return Math.toDegrees(ans);
 	}
-	/** return the vertical angles in DEGREES of the vector this-->p, 
+	/** return the vertical angles in DEGREES of the vector this--p, 
 	 *  @param h: is the extra height of the point p (used by GISElement).
+	 *  @param p is a Point3D
+	 *  @return the up_alngle
 	 * */
 	public double up_angle(Point3D p, double h) {
 		double ans = 0;
 		ans = Math.atan2((p._z+h-_z), this.distance2D(p));
 		return Math.toDegrees(ans);
 	}
-	/** transform from radians to angles */
+	/** transform from angles to radians 
+	 * @param a is double
+	 * @return angle of a 
+	 */
 	public static double r2d(double a) { return Math.toDegrees(a);}
-	/** transform from radians to angles */
+	/** transform from radians to angles 
+	 * @param a is double
+	 * @return radians of a 
+	 */
 	public static double d2r(double a) { return Math.toRadians(a);}
 	////////////////////////////////////////////////////////////////////////////////
 
