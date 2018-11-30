@@ -2,7 +2,7 @@ package GIS;
 
 import java.util.Set;
 /**
- * 
+ * This interface represents a GIS project with many layers and its meta data
  * @author Shilo Gilor and Amiel Liberman
  *
  */

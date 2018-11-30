@@ -19,13 +19,22 @@ import GIS.My_GIS_element;
 import GIS.My_meta_data;
 
 /**
- * 
+ * This class takes a CSV file and converts it to a GIS layer
  * @author Shilo Gilor and Amiel Liberman
  *
  */
 public class Csv2kml 
 {
-
+/**
+ * 
+ * @param path_of_csv the location that we are taking the csv file
+ * @param path_of_kml_end_point the location that we want the KML file to be saved
+ * @param kml_file_name the name of the name of the KML file requested
+ * @return a fully loaded GIS layer
+ * @throws IOException Exception
+ * @throws NumberFormatException Exception
+ * @throws ParseException Exception
+ */
 	public My_GIS_layer convertCSVToKML(String path_of_csv,String path_of_kml_end_point, String kml_file_name) throws IOException, NumberFormatException, ParseException
 	{
 		
@@ -54,7 +63,7 @@ public class Csv2kml
 					, new My_meta_data((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(row[3])).getTime(), null, "red"),
 					row[0], row[1], row[2], row[4], row[5], row[9] , row[10]);
 			gis_layer.add(gis_element);
-			kmlmiddle = kmlmiddle + gis_element.toStringOfGISElements();
+			kmlmiddle = kmlmiddle + gis_element.toStringOfGISElements("50147814");
 			line = br.readLine();
 		}
 		String kmlend = "    </Folder>\n" + 
@@ -71,30 +80,5 @@ public class Csv2kml
 		}   
 		return gis_layer;
 	}
-	public My_GIS_project multiCSV(String dir) throws IOException, NumberFormatException, ParseException
-	{
-		My_GIS_project gis_project = new My_GIS_project(null);
-		int i=0;
-		File[] filesInDirectory = new File(dir).listFiles();
-		for(File f : filesInDirectory)
-		{
-			String filePath = f.getAbsolutePath();
-			String fileExtenstion = filePath.substring(filePath.lastIndexOf(".") + 1,filePath.length());
-			if("csv".equals(fileExtenstion))
-			{
-				i++;
-				gis_project.add(convertCSVToKML(filePath, "/Users/shilo/Desktop/", "kmltest_"+i));
-			}
-		}
-		Writer fwriter;
-		try {
-			fwriter = new FileWriter(dir+"kml_project.kml");
-			fwriter.write(gis_project.toStringOfGISProject());
-			fwriter.flush();
-			fwriter.close();
-		}catch (IOException e1) {
-			e1.printStackTrace();
-		} 
-		return gis_project;
-	}
+	
 }

@@ -9,13 +9,27 @@ import java.io.Writer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import GIS.My_GIS_element;
 import GIS.My_GIS_layer;
 import GIS.My_GIS_project;
 import GIS.My_meta_data;
 import Geom.My_geom_element;
 
+/**
+ * This class takes a path and converts all CSV files in the  to 1 kml file 
+ * @author Shilo Gilor and Amiel Liberman
+ *
+ */
 public class MultiCSV {
+	/**
+	 * 
+	 * @param path_of_csv the path of the CSV where needed to convert to a GIS layer
+	 * @return a GIS layer full with the data in the CSV file
+	 * @throws IOException Exception
+	 * @throws NumberFormatException Exception
+	 * @throws ParseException Exception
+	 */
 	public My_GIS_layer convertCSVToKML(String path_of_csv) throws IOException, NumberFormatException, ParseException
 	{
 		
@@ -33,11 +47,21 @@ public class MultiCSV {
 					, new My_meta_data((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(row[3])).getTime(), null, "red"),
 					row[0], row[1], row[2], row[4], row[5], row[9] , row[10]);
 			gis_layer.add(gis_element);
-			kmlmiddle = kmlmiddle + gis_element.toStringOfGISElements();
+			kmlmiddle = kmlmiddle + gis_element.toStringOfGISElements("50147814");
 			line = br.readLine();
 		}  
 		return gis_layer;
 	}
+	/**
+	 * 
+	 * @param dir  the path of the files where needed to convert the csv's
+	 * @param out_dir the path of the location to save the KML file
+	 * @param out_name the name to give the KML file
+	 * @return a GIS project full with the data in the file path
+	 * @throws IOException Exception
+	 * @throws NumberFormatException Exception
+	 * @throws ParseException Exception
+	 */
 	public My_GIS_project multiCSV(String dir,String out_dir,String out_name) throws IOException, NumberFormatException, ParseException
 	{
 		My_GIS_project gis_project = new My_GIS_project(null);
