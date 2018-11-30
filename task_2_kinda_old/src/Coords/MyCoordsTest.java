@@ -13,7 +13,6 @@ class MyCoordsTest {
 		MyCoords cord=new MyCoords();
 		Point3D gps_test_one= new Point3D(20,20,2);
 		Point3D gps_test_add=cord.add(gps_test_one, new Point3D(10,10,10));
-		System.out.println(gps_test_add.x()+" :"+gps_test_add.y()+" :"+gps_test_add.z());
 		assertTrue(20.0001 <=gps_test_add.x()&&20.0002 >=gps_test_add.x()&&20.00000<=gps_test_add.y()&&20.0001>=gps_test_add.y()&&17.4643<=gps_test_add.z()&&17.4644>=gps_test_add.z());
 	}
 
@@ -22,7 +21,6 @@ class MyCoordsTest {
 		MyCoords cord=new MyCoords();
 		Point3D gps_test_one=new Point3D(50,50,50);
 		gps_test_one=cord.add(gps_test_one, new Point3D(10,10,10));
-		System.out.println(gps_test_one.x()+" :"+gps_test_one.y()+" :"+gps_test_one.z());
 		assertTrue(50.0006 <=gps_test_one.x()&&50.0007 >=gps_test_one.x()&&49.9999<=gps_test_one.y()&&50>=gps_test_one.y()&&66.7162<=gps_test_one.z()&&66.7163>=gps_test_one.z());
 
 	}
@@ -38,7 +36,6 @@ class MyCoordsTest {
 	void testAzimuth_elevation_dist() {
 		MyCoords cord=new MyCoords();
 		double[] test_point=cord.azimuth_elevation_dist(new Point3D(32.106352,35.205225,650),new Point3D(32.103315,35.209039,670));
-		System.out.println(test_point[0]+" "+test_point[1]+" "+test_point[2]);
 		assertTrue(141.4705 <=test_point[0]&&141.4706 >=test_point[0]&&2.3226<=test_point[1]&&2.3227>=test_point[1]&&493.5044<=test_point[2]&&493.5045>=test_point[2]);
 	}
 
