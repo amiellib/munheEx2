@@ -64,7 +64,7 @@ public class MultiCSV {
 	 */
 	public My_GIS_project multiCSV(String dir,String out_dir,String out_name) throws IOException, NumberFormatException, ParseException
 	{
-		My_GIS_project gis_project = new My_GIS_project(null);
+		My_GIS_project gis_project = new My_GIS_project(new My_meta_data(new Date().getTime(), null , "7f00ffff"));
 		File[] filesInDirectory = new File(dir).listFiles();
 		for(File f : filesInDirectory)
 		{
