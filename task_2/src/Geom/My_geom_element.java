@@ -28,7 +28,12 @@ public class My_geom_element implements Geom_element{
 		MyCoords mycoords = new MyCoords();
 		Point3D cartesian0= mycoords.convert_radians_to_cartesian(p);
 		Point3D cartesian1= mycoords.convert_radians_to_cartesian(my_geom);
-		return cartesian1.distance3D(cartesian0);
+		double result = cartesian1.distance3D(cartesian0);
+		if (result>100000)
+		{
+			throw new RuntimeException("distance to large, the limit is 100KM, and the distance for these 2 points is " + result); 
+		}
+		return result;
 	}
 	/**
 	 * This function calculates the distance between my geo-location and another geo-location in a 2D plane
@@ -42,6 +47,14 @@ public class My_geom_element implements Geom_element{
 		return my_geom;
 	}
 	public void setMy_geom(Point3D geom) {
-		this.my_geom = geom;
+		MyCoords mycoords = new MyCoords();
+		if (mycoords.isValid_GPS_Point(geom))
+		{
+			this.my_geom = geom;
+		}
+		else
+		{
+			throw new RuntimeException("new geom location is not valid"); 
+		}
 	}
 }
